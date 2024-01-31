@@ -1,18 +1,8 @@
-from Item import Item, ItemObject
+from Item import Item
 
 class AudioBook(Item):
-    def __init__(self, access_token):
-        endpoint = "https://api.spotify.com/v1/audiobooks/"
-        super().__init__(access_token, endpoint)
-
-    def get(self, audiobook_id):
-        response = Item.get(self, audiobook_id)
-        return AudioBookObject(response)
-
-class AudioBookObject(ItemObject):
-    def __init__(self, response):
-        self.response = response
-        super().__init__(self.response)
+    def __init__(self, access_token, response, endpoint):
+        super().__init__(access_token, endpoint, response)
         self.setAttributes()
 
     def setAttributes(self):
@@ -24,14 +14,14 @@ class AudioBookObject(ItemObject):
             self.narrators.append(narrator["name"])
         self.chapters = []
         for chapter in self.response["chapters"]["items"]:
-            self.chapters.append(ChapterObject(chapter))
+            self.chapters.append(Chapter(chapter))
         self.publisher = self.response["publisher"]
         self.languages = self.response["languages"]
         self.description = self.response["description"]
         self.image = self.response["images"][0]["url"]
 
 
-class ChapterObject:
+class Chapter:
     def __init__(self, chapter):
         self.id = chapter["id"]
         self.name = chapter["name"]

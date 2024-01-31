@@ -1,19 +1,8 @@
-from Item import Item, ItemObject
+from Item import Item
 
 class Album(Item):
-    def __init__(self, access_token):
-        endpoint = "https://api.spotify.com/v1/albums/"
-        super().__init__(access_token, endpoint)
-
-    def get(self, album_id):
-        response = Item.get(self, album_id)
-        return AlbumObject(response)
-
-
-class AlbumObject(ItemObject):
-    def __init__(self, response):
-        self.response = response
-        super().__init__(self.response)
+    def __init__(self, access_token, response, endpoint):
+        super().__init__(access_token, endpoint, response)
         self.setAttributes()
 
     def setAttributes(self):

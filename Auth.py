@@ -3,10 +3,10 @@ import json
 import time
 
 class Auth:
-    def __init__(self, client_id, client_secret):
+    def __init__(self, client_id, client_secret, endpoints):
         self.client_id = client_id
         self.client_secret = client_secret
-        self.auth_endpoint = "https://accounts.spotify.com/api/token"
+        self.auth_endpoint = endpoints["auth"]
         self.access_token, self.creation_time, self.expiry_time = self.auth()
 
     def auth(self):

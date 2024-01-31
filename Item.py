@@ -2,12 +2,16 @@ import requests
 import json
 
 class Item:
-    def __init__(self, access_token, endpoint):
+    def __init__(self, access_token, endpoint, response):
+        self.response = response
+        self.url = self.response["external_urls"]["spotify"]
+        self.id = self.response["id"]
+        self.name = self.response["name"]
         self.endpoint = endpoint
         self.header = {
             "Authorization": f"Bearer  {access_token}"
         }
-        self.token = access_token;
+        self.access_token = access_token
 
     def get(self, item_id):
         try:
@@ -20,9 +24,4 @@ class Item:
         response = request.json()
         return response
 
-class ItemObject:
-    def __init__(self, response):
-        self.url = self.response["external_urls"]["spotify"]
-        self.id = self.response["id"]
-        self.name = self.response["name"]
 

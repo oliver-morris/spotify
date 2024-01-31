@@ -1,19 +1,9 @@
-from Item import Item, ItemObject
-from Episode import EpisodeObject
+from Item import Item
 
 class Show(Item):
-    def __init__(self, access_token):
-        endpoint = "https://api.spotify.com/v1/shows/"
-        super().__init__(access_token, endpoint)
-
-    def get(self, show_id):
-        response = Item.get(self, show_id)
-        return ShowObject(response)
-
-class ShowObject(ItemObject):
-    def __init__(self, response):
-        self.response = response
-        super().__init__(self.response)
+    def __init__(self, access_token, response, endpoint):
+        super().__init__(access_token, endpoint, response)
+        self.albums = None
         self.setAttributes()
 
     def setAttributes(self):

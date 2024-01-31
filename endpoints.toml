@@ -1,0 +1,8 @@
+album = "https://api.spotify.com/v1/albums/"
+artist = "https://api.spotify.com/v1/artists/"
+audiobook = "https://api.spotify.com/v1/audiobooks/"
+auth = "https://accounts.spotify.com/api/token"
+episode = "https://api.spotify.com/v1/episodes/"
+playlist = "https://api.spotify.com/v1/playlists/"
+show = "https://api.spotify.com/v1/shows/"
+track = "https://api.spotify.com/v1/tracks/"

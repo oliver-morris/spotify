@@ -1,4 +1,4 @@
-from Item import Item, ItemObject
+from Item import Item
 import os
 import string
 from urllib.parse import quote
@@ -6,18 +6,8 @@ import requests
 from pytube import YouTube
 
 class Track(Item):
-    def __init__(self, access_token):
-        endpoint = "https://api.spotify.com/v1/tracks/"
-        super().__init__(access_token, endpoint)
-
-    def get(self, track_id):
-        response = Item.get(self, track_id)
-        return TrackObject(response)
-
-class TrackObject(ItemObject):
-    def __init__(self, response):
-        self.response = response
-        super().__init__(self.response)
+    def __init__(self, access_token, response, endpoint):
+        super().__init__(access_token, endpoint, response)
         self.setAttributes()
 
     def setAttributes(self):
@@ -65,7 +55,6 @@ class TrackObject(ItemObject):
             video_id = response.split('{"videoRenderer":{"videoId":"')[1]
             video_id = video_id.split('"')[0]
             video_url = f"https://www.youtube.com/watch?v={video_id}"
-            print(video_url)
             #try:
             yt = YouTube(video_url)
             #except:

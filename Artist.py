@@ -1,21 +1,9 @@
-from Item import Item, ItemObject
+from Item import Item
 
 class Artist(Item):
-    def __init__(self, access_token):
-        endpoint = "https://api.spotify.com/v1/artists/"
-        super().__init__(access_token, endpoint)
-
-    def get(self, artist_id):
-        response = Item.get(self, artist_id)
-        return ArtistObject(self.token, response)
-
-
-class ArtistObject(ItemObject):
-    def __init__(self, token, response):
-        self.response = response
-        self.token = token
+    def __init__(self, access_token, response, endpoint):
+        super().__init__(access_token, endpoint, response)
         self.albums = None
-        super().__init__(self.response)
         self.setAttributes()
 
     def setAttributes(self):
@@ -28,5 +16,6 @@ class ArtistObject(ItemObject):
         if from_memory:
             if self.albums:
                 return self.albums
-        endpoint = f"https://api.spotify.com/v1/artists/{self.id}/albums"
+        endpoint = f"{self.endpoint}/{self.id}/albums"
+        #i = self.artist.getReq()
 

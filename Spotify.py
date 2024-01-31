@@ -1,22 +1,25 @@
 from Auth import Auth
-from Artist import Artist
-from Album import Album
 from Search import Search
-from Track import Track
-from Playlist import Playlist
-from Episode import Episode
-from AudioBook import AudioBook
-from Show import Show
+from Get import Get
+import os
 
 class Spotify:
     def __init__(self, client_id, client_secret):
-        self.auth = Auth(client_id, client_secret)
-        self.token = self.auth.getAccessToken()
-        self.search = Search(self.token)
-        self.artist = Artist(self.token)
-        self.album = Album(self.token)
-        self.track = Track(self.token)
-        self.playlist = Playlist(self.token)
-        #self.episode = Episode(self.token)
-        self.audiobook = AudioBook(self.token)
-        self.show = Show(self.token)
+        self.endpoints = self.loadEndpoints()
+        self.auth = Auth(client_id, client_secret, self.endpoints)
+        self.access_token = self.auth.getAccessToken()
+        self.search = Search(self.access_token, self)
+        self.get = Get(self.access_token, self.endpoints)
+
+    def loadEndpoints(self):
+        try:
+            import tomllib as toml
+        except ModuleNotFoundError:
+            import tomli as toml
+
+        config_file = os.path.abspath(os.path.dirname(__file__)) + "\\endpoints.toml"
+        with open(config_file, "rb") as config_file:
+          config = toml.load(config_file)
+          config_file.close()
+
+        return config
