@@ -43,38 +43,36 @@ class Search:
         if r:
             endpoint = self.spotify.endpoints["album"]
             r = self.spotify.get.get(endpoint, r["id"])
-            return Album(self.token, r, endpoint)
+            return Album(self.token, r, self.spotify.endpoints)
     def artist(self, search_query):
         r = self.request(search_query, "artist")
         if r:
-            endpoint = self.spotify.endpoints["artist"]
-            return Artist(self.token, r, endpoint)
+            return Artist(self.token, r, self.spotify.endpoints)
     def playlist(self, search_query):
         r = self.request(search_query, "playlist")
         if r:
             endpoint = self.spotify.endpoints["playlist"]
             r = self.spotify.get.get(endpoint, r["id"])
-            return Playlist(self.token, r, endpoint)
+            return Playlist(self.token, r, self.spotify.endpoints)
     def track(self, search_query):
         r = self.request(search_query, "track")
         if r:
-            endpoint = self.spotify.endpoints["track"]
-            return Track(self.token, r, endpoint)
+            return Track(self.token, r, self.spotify.endpoints)
     def show(self, search_query):
         r = self.request(search_query, "show")
         if r:
             endpoint = self.spotify.endpoints["show"]
             r = self.spotify.get.get(endpoint, r["id"])
-            return Show(self.token, r, endpoint)
+            return Show(self.token, r, self.spotify.endpoints)
     def episode(self, search_query):
         r = self.request(search_query, "episode")
         if r:
             endpoint = self.spotify.endpoints["episode"]
             r = self.spotify.get.get(endpoint, r["id"])
-            return Episode(self.token, r, endpoint)
+            return Episode(self.token, r, self.spotify.endpoints)
     def audiobook(self, search_query):
         r = self.request(search_query, "audiobook")
         if r:
             endpoint = self.spotify.endpoints["audiobook"]
             r = self.spotify.get.get(endpoint, r["id"])
-            return AudioBook(self.token, r, endpoint)
+            return AudioBook(self.token, r, self.spotify.endpoints)

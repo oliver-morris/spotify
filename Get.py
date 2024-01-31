@@ -30,28 +30,28 @@ class Get:
 
     def album(self, album_id):
         endpoint = self.endpoints["album"]
-        return Album(self.access_token, self.get(endpoint, album_id), endpoint)
+        return Album(self.access_token, self.get(endpoint, album_id), self.endpoints)
 
     def artist(self, artist_id):
         endpoint = self.endpoints["artist"]
-        return Artist(self.access_token, self.get(endpoint, artist_id), endpoint)
+        return Artist(self.access_token, self.get(endpoint, artist_id), self.endpoints)
 
     def audiobook(self, audiobook_id):
         endpoint = self.endpoints["audiobook"]
-        return AudioBook(self.access_token, self.get(endpoint, audiobook_id), endpoint)
+        return AudioBook(self.access_token, self.get(endpoint, audiobook_id), self.endpoints)
 
     def episode(self, episode_id):
         endpoint = self.endpoints["episode"]
-        return Episode(self.access_token, self.get(endpoint, episode_id), endpoint)
+        return Episode(self.access_token, self.get(endpoint, episode_id), self.endpoints)
 
     def playlist(self, playlist_id):
         endpoint = self.endpoints["playlist"]
-        return Playlist(self.access_token, self.get(endpoint, playlist_id), endpoint)
+        return Playlist(self.access_token, self.get(endpoint, playlist_id), self.endpoints)
 
     def show(self, show_id):
         endpoint = self.endpoints["show"]
-        return Show(self.access_token, self.get(endpoint, show_id), endpoint)
+        return Show(self.access_token, self.get(endpoint, show_id), self.endpoints)
 
     def track(self, track_id):
         endpoint = self.endpoints["track"]
-        return Track(self.access_token, self.get(endpoint, track_id), endpoint)
+        return Track(self.access_token, self.get(endpoint, track_id), self.endpoints)

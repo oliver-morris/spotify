@@ -1,8 +1,9 @@
 from Item import Item
 
 class Show(Item):
-    def __init__(self, access_token, response, endpoint):
-        super().__init__(access_token, endpoint, response)
+    def __init__(self, access_token, response, endpoints):
+        endpoint = endpoints["show"]
+        super().__init__(access_token, endpoint, response, endpoints)
         self.albums = None
         self.setAttributes()
 

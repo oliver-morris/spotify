@@ -1,8 +1,9 @@
 from Item import Item
 
 class Playlist(Item):
-    def __init__(self, access_token, response, endpoint):
-        super().__init__(access_token, endpoint, response)
+    def __init__(self, access_token, response, endpoints):
+        endpoint = endpoints["playlist"]
+        super().__init__(access_token, endpoint, response, endpoints)
         self.setAttributes()
 
     def setAttributes(self):
