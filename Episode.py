@@ -1,9 +1,9 @@
 from Item import Item
 
 class Episode(Item):
-    def __init__(self, access_token, response, endpoints):
-        endpoint = endpoints["episode"]
-        super().__init__(access_token, endpoint, response, endpoints)
+    def __init__(self, response, requests):
+        endpoint = requests.endpoints["episode"]
+        super().__init__(endpoint, response, requests)
         self.setAttributes()
 
     def setAttributes(self):

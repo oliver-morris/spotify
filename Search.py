@@ -9,9 +9,9 @@ from AudioBook import AudioBook
 from Show import Show
 
 class Search:
-    def __init__(self, access_token, spotify):
-        self.spotify = spotify
-        self.token = access_token
+    def __init__(self, requests):
+        self.requests = requests
+        self.token = requests.access_token
         self.endpoint = "https://api.spotify.com/v1/search"
         self.header = {
             "Authorization": f"Bearer  {self.token}"
@@ -41,38 +41,38 @@ class Search:
     def album(self, search_query):
         r = self.request(search_query, "album")
         if r:
-            endpoint = self.spotify.endpoints["album"]
-            r = self.spotify.get.get(endpoint, r["id"])
-            return Album(self.token, r, self.spotify.endpoints)
+            endpoint = self.requests.endpoints["album"]
+            r = self.requests.get(endpoint, r["id"])
+            return Album(r, self.requests)
     def artist(self, search_query):
         r = self.request(search_query, "artist")
         if r:
-            return Artist(self.token, r, self.spotify.endpoints)
+            return Artist(r, self.requests)
     def playlist(self, search_query):
         r = self.request(search_query, "playlist")
         if r:
-            endpoint = self.spotify.endpoints["playlist"]
-            r = self.spotify.get.get(endpoint, r["id"])
-            return Playlist(self.token, r, self.spotify.endpoints)
+            endpoint = self.requests.endpoints["playlist"]
+            r = self.requests.get(endpoint, r["id"])
+            return Playlist(r, self.requests)
     def track(self, search_query):
         r = self.request(search_query, "track")
         if r:
-            return Track(self.token, r, self.spotify.endpoints)
+            return Track(r, self.requests)
     def show(self, search_query):
         r = self.request(search_query, "show")
         if r:
-            endpoint = self.spotify.endpoints["show"]
-            r = self.spotify.get.get(endpoint, r["id"])
-            return Show(self.token, r, self.spotify.endpoints)
+            endpoint = self.requests.endpoints["show"]
+            r = self.requests.get(endpoint, r["id"])
+            return Show(r, self.requests)
     def episode(self, search_query):
         r = self.request(search_query, "episode")
         if r:
-            endpoint = self.spotify.endpoints["episode"]
-            r = self.spotify.get.get(endpoint, r["id"])
-            return Episode(self.token, r, self.spotify.endpoints)
+            endpoint = self.requests.endpoints["episode"]
+            r = self.requests.get.get(endpoint, r["id"])
+            return Episode(r, self.requests)
     def audiobook(self, search_query):
         r = self.request(search_query, "audiobook")
         if r:
-            endpoint = self.spotify.endpoints["audiobook"]
-            r = self.spotify.get.get(endpoint, r["id"])
-            return AudioBook(self.token, r, self.spotify.endpoints)
+            endpoint = self.requests.endpoints["audiobook"]
+            r = self.requests.get(endpoint, r["id"])
+            return AudioBook(r, self.requests)

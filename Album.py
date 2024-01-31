@@ -1,20 +1,18 @@
 from Item import Item
+from ItemList import ItemList
 from Track import Track
 
 class Album(Item):
-    def __init__(self, access_token, response, endpoints):
-        endpoint = endpoints["album"]
-        super().__init__(access_token, endpoint, response, endpoints)
+    def __init__(self, response, requests):
+        endpoint = requests.endpoints["album"]
+        super().__init__(endpoint, response, requests)
         self.setAttributes()
-        self.tracks = []
+        self.tracks = ItemList([])
 
     def setAttributes(self):
         self.artists = {}
-        #self.tracks = {}
         for artist in self.response["artists"]:
             self.artists[artist["id"]] = artist["name"]
-        #for track in self.response["tracks"]["items"]:
-        #    self.tracks[track["id"]] = track["name"]
         self.genres = self.response["genres"]
         self.album_cover = self.response["images"][0]["url"]
         self.label = self.response["label"]
@@ -23,13 +21,20 @@ class Album(Item):
 
     def getTracks(self, from_memory=True):
         if from_memory:
-            if self.tracks:
+            if self.tracks.items:
                 return self.tracks
         endpoint_search = f"{self.id}/tracks"
         r = Item.get(self, endpoint_search)
-        self.tracks = []
+        self.tracks = ItemList([])
+        ids = []
         for track in r["items"]:
-            id = track["id"]
-            r = Item.get(self, id, self.endpoints["track"])
-            self.tracks.append(Track(self.access_token, r, self.endpoints))
+            ids.append(track["id"])
+        endpoint = self.requests.endpoints["several_tracks"]
+        r = self.requests.getMultiple(endpoint, ids)
+        for track in r:
+            if track:
+                track_id = track["id"]
+                if track_id not in self.tracks.ids():
+                    track = Track(track, self.requests)
+                    self.tracks.add(track)
         return self.tracks

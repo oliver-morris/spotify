@@ -2,14 +2,17 @@ from Auth import Auth
 from Search import Search
 from Get import Get
 import os
+from Requests import Requests
+from ItemList import ItemList
 
 class Spotify:
     def __init__(self, client_id, client_secret):
-        self.endpoints = self.loadEndpoints()
-        self.auth = Auth(client_id, client_secret, self.endpoints)
-        self.access_token = self.auth.getAccessToken()
-        self.search = Search(self.access_token, self)
-        self.get = Get(self.access_token, self.endpoints)
+        endpoints = self.loadEndpoints()
+        auth = Auth(client_id, client_secret, endpoints)
+        access_token = auth.getAccessToken()
+        self.requests = Requests(endpoints, access_token)
+        self.search = Search(self.requests)
+        self.get = Get(self.requests)
 
     def loadEndpoints(self):
         try:

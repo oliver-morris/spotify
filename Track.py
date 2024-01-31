@@ -6,9 +6,9 @@ import requests
 from pytube import YouTube
 
 class Track(Item):
-    def __init__(self, access_token, response, endpoints):
-        endpoint = endpoints["track"]
-        super().__init__(access_token, endpoint, response, endpoints)
+    def __init__(self, response, requests):
+        endpoint = requests.endpoints["track"]
+        super().__init__(endpoint, response, requests)
         self.setAttributes()
 
     def setAttributes(self):
