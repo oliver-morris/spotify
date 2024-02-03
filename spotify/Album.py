@@ -1,6 +1,6 @@
-from Item import Item
-from ItemList import ItemList
-from Track import Track
+from .Item import Item
+from .ItemList import ItemList
+from .Track import Track
 
 class Album(Item):
     def __init__(self, response, requests):

@@ -1,12 +1,12 @@
 import requests
 import json
 from urllib.parse import quote, unquote
-from Artist import Artist
-from Album import Album
-from Track import Track
-from Playlist import Playlist
-from AudioBook import AudioBook
-from Show import Show
+from .Artist import Artist
+from .Album import Album
+from .Track import Track
+from .Playlist import Playlist
+from .AudioBook import AudioBook
+from .Show import Show
 
 class Search:
     def __init__(self, requests):

@@ -1,4 +1,4 @@
-from Item import Item
+from .Item import Item
 import os
 import string
 from urllib.parse import quote

@@ -1,16 +1,17 @@
-from Item import Item
+from .Item import Item
 
-class Episode(Item):
+class Show(Item):
     def __init__(self, response, requests):
-        endpoint = requests.endpoints["episode"]
+        endpoint = requests.endpoints["show"]
         super().__init__(endpoint, response, requests)
+        self.albums = None
         self.setAttributes()
 
     def setAttributes(self):
-        self.preview_url = self.response["audio_preview_url"]
+        self.episodes = []
+        for episode in self.response["episodes"]["items"]:
+            self.episodes.append(EpisodeObject(episode))
         self.description = self.response["description"]
-        self.duration = self.response["duration_ms"]
         self.image = self.response["images"][0]["url"]
         self.languages = self.response["languages"]
-        self.release_date = self.response["release_date"]
-
+        self.publisher = self.response["publisher"]

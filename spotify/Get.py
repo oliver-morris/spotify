@@ -1,13 +1,13 @@
 import json
 from urllib.parse import quote
-from Album import Album
-from Artist import Artist
-from AudioBook import AudioBook
-from Episode import Episode
-from Playlist import Playlist
-from Show import Show
-from Track import Track
-from Requests import Requests
+from .Album import Album
+from .Artist import Artist
+from .AudioBook import AudioBook
+from .Episode import Episode
+from .Playlist import Playlist
+from .Show import Show
+from .Track import Track
+from .Requests import Requests
 
 
 class Get:

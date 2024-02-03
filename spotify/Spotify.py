@@ -1,9 +1,9 @@
-from Auth import Auth
-from Search import Search
-from Get import Get
+from .Auth import Auth
+from .Search import Search
+from .Get import Get
 import os
-from Requests import Requests
-from ItemList import ItemList
+from .Requests import Requests
+from .ItemList import ItemList
 
 class Spotify:
     def __init__(self, client_id, client_secret):

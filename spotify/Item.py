@@ -1,5 +1,5 @@
 import json
-from Requests import Requests
+from .Requests import Requests
 
 class Item:
     def __init__(self, endpoint, response, requests):

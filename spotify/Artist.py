@@ -1,6 +1,6 @@
-from Item import Item
-from Album import Album
-from ItemList import ItemList
+from .Item import Item
+from .Album import Album
+from .ItemList import ItemList
 
 class Artist(Item):
     def __init__(self, response, requests):

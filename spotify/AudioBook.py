@@ -1,4 +1,4 @@
-from Item import Item
+from .Item import Item
 
 class AudioBook(Item):
     def __init__(self, response, requests):
