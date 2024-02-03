@@ -38,12 +38,12 @@ class Track(Item):
                 file_path += path
         else:
             artist_id = list(self.artists.keys())[0]
-            file_name = artist_name + " " + artist_id
+            file_path = artist_name + " " + artist_id
             translator = str.maketrans(string.punctuation, '_'*len(string.punctuation))
-            file_name = file_name.translate(translator)
-            file_name = file_name.replace(" ", "_")
+            file_path = file_path.translate(translator)
+            file_path = file_path.replace(" ", "_")
             abs_path = os.path.abspath(os.path.dirname(__file__))
-            file_path = f"{abs_path}\\videos\\{file_name}"
+            file_path = f"{abs_path}\\videos\\{file_path}"
 
         youtube_search_query = f"{self.name} - {artist_name} lyric video"
         youtube_search_query = quote(youtube_search_query)
@@ -64,6 +64,6 @@ class Track(Item):
                                   file_extension="mp4").first().download(
                     output_path=file_path,
                     filename=file_name)
-            return file_name + "\\" + file_path
+            return file_path + "\\" + file_name
 
 
