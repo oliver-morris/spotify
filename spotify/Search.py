@@ -7,6 +7,7 @@ from .Track import Track
 from .Playlist import Playlist
 from .AudioBook import AudioBook
 from .Show import Show
+from .Episode import Episode
 
 class Search:
     def __init__(self, requests):
